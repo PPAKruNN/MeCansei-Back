@@ -5,8 +5,8 @@ import { getProductById, getProducts, postProduct } from "../controllers/product
 
 const router = Router();
 
-router.get("/products", validateSchema(productsSchema), getProducts);
-router.get("/products/:id", validateSchema(productsSchema), getProductById);
+router.get("/products", getProducts);
+router.get("/products/:id", getProductById);
 router.post("/products", validateSchema(productsSchema), postProduct);
 
 export default router;
