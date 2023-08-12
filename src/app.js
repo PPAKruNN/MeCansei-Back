@@ -4,6 +4,7 @@ import cors from "cors";
 import accountRouter from "./routes/account.routes.js";
 import galleryRouter from "./routes/gallery.routes.js";
 import productsRouter from "./routes/products.routes.js";
+import categoriesRouter from "./routes/categories.routes.js";
 
 const app = Express();
 
@@ -12,5 +13,6 @@ app.use(cors());
 app.use(accountRouter);
 app.use(galleryRouter);
 app.use(productsRouter);
+app.use(categoriesRouter);
 
 app.listen(5000);
