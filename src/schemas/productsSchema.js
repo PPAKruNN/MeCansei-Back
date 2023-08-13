@@ -7,5 +7,5 @@ export default Joi.object({
   isAvailable: Joi.boolean().required(),
   ownerid: Joi.number().integer().required(),
   categoriesId: Joi.array().items(Joi.number().integer()),
-  photosId: Joi.array().items(Joi.number.integer())
+  photosId: Joi.array().items(Joi.number().integer())
 });

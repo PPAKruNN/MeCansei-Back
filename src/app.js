@@ -10,6 +10,7 @@ const app = Express();
 
 app.use(json());
 app.use(cors());
+
 app.use(accountRouter);
 app.use(galleryRouter);
 app.use(productsRouter);

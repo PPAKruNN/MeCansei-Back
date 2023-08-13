@@ -1,4 +1,4 @@
-import { ReadGallery } from "../repositories/gallery.repository";
+import { ReadGallery } from "../repositories/gallery.repository.js";
 
 export async function getGallery() {
     

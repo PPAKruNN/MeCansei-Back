@@ -1,4 +1,4 @@
-import { ReadCategories } from "../repositories/categories.repository";
+import { ReadCategories, CreateCategory, DeleteCategory } from "../repositories/categories.repository.js";
 
 export async function getCategories(req, res) {
     try {

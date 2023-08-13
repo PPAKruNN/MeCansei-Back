@@ -5,6 +5,8 @@ import { GetUserByToken } from "../repositories/user.repository.js";
 export default async function authenticate(req, res, next) {
     
     const { authorization } = req.headers;
+    if(!authorization) return res.sendStatus(401);
+
     const token = authorization.replace("Bearer", "").trim();
 
     const user = await GetUserByToken(token)

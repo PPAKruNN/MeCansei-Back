@@ -1,6 +1,7 @@
 import { Router } from "express";
-import categorySchema from "../schemas/categorySchema";
-import { postCategories } from "../controllers/categories";
+import categorySchema from "../schemas/categorySchema.js";
+import { deleteCategory, getCategories, postCategory } from "../controllers/categories.js";
+import validateSchema from "../middlewares/validateSchema.js";
 
 const router = Router();
 
