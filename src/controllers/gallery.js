@@ -1,10 +1,10 @@
-import { ReadGallery } from "../repositories/gallery.repository.js";
+import { CreatePhoto, DeletePhoto, ReadGallery, ReadPhotoById, UpdatePhoto } from "../repositories/gallery.repository.js";
 
-export async function getGallery() {
+export async function getGallery(req, res) {
     
+    const userId = res.locals.id;
+
     try {
-        const userId = res.locals.id;
-        
         const gallery = await ReadGallery(userId);
 
         return res.send(gallery);
@@ -16,7 +16,7 @@ export async function getGallery() {
 
 }
 
-export async function getPhotoById() {
+export async function getPhotoById(req, res) {
     try {
         const userId = res.locals.id;
         const { id } = req.params;
@@ -31,9 +31,12 @@ export async function getPhotoById() {
     }
 }
 
-export async function postPhoto() {
+export async function postPhoto(req, res) {
+    const userId = res.locals.id;
+
+    console.log(res.locals.id)
+
     try {
-        const userId = res.locals.id;
         const { url } = req.body;
 
         await CreatePhoto(url, userId);
@@ -45,7 +48,7 @@ export async function postPhoto() {
     }
 }
 
-export async function deletePhoto() {
+export async function deletePhoto(req, res ) {
     try {
         const userId = res.locals.id;
         const { id } = req.params;
@@ -59,7 +62,7 @@ export async function deletePhoto() {
     }
 }
 
-export async function putPhoto() {
+export async function putPhoto(req,res ) {
     try {
         const userId = res.locals.id;
         const { id } = req.params;

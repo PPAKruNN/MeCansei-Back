@@ -12,12 +12,12 @@ export async function getCategories(req, res) {
 }
 
 export async function postCategory(req, res) {
+    const { name } = req.body;
+
     try {
-        const { name } = req.body;
+        const id = await CreateCategory(name);
 
-        await CreateCategory(name);
-
-        return res.sendStatus(201);
+        return res.status(201).send({id});
     } catch (error) {
         console.log(error);
         return res.sendStatus(500);

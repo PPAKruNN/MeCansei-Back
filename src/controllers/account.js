@@ -29,9 +29,9 @@ export async function Login(req,res) {
     try {
         const { cpf, email, password } = req.body;
         const user = await GetUserByCpfOrEmail(cpf, email);
-        if(user == null) return res.sendStatus(404);
+        if(user == null) return res.status(404).send("Usuário não encontrado");
 
-        if(!bcrypt.compareSync(password, user.passwordhash)) return res.sendStatus(401);
+        if(!bcrypt.compareSync(password, user.passwordhash)) return res.status(401).send("Senha incorreta");
 
         const token = v4();
         await UpdateSession(user.id, token);

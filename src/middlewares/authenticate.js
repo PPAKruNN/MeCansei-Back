@@ -12,7 +12,7 @@ export default async function authenticate(req, res, next) {
     const user = await GetUserByToken(token)
     if(user === null) return res.sendStatus(401);
     
-    res.locals.id = user.id;
+    res.locals.id = user.userid;
 
     next();
 }
