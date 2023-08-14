@@ -1,5 +1,4 @@
 import { db } from "../database.js";
-import { CreateCategory } from "./categories.repository.js";
 
 export async function ReadProducts() {
     const product = await db.query(`
