@@ -1,4 +1,4 @@
-import { CreateProduct, DeleteProduct, ReadProductById, ReadProducts, UpdateProduct } from "../repositories/products.repository.js";
+import { CreateProduct, DeleteProduct, ReadProductById, ReadProducts, ReadUserProducts, UpdateProduct, UpdateProductAvailabilty } from "../repositories/products.repository.js";
 
 export async function getProducts (req, res) {
     try {
@@ -9,6 +9,32 @@ export async function getProducts (req, res) {
         res.status(500).send(error.message);
     }
 };
+
+export async function getMineProducts (req, res) {
+    try {
+        const { id } = res.locals;
+        const products = await ReadUserProducts(id);
+
+        res.status(200).send(products);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);
+    }
+};
+
+export async function patchAvailabilty(req, res) {
+    try {
+        const { isavailable } = req.body;
+        const { id } = req.params;
+        
+        await UpdateProductAvailabilty(id, isavailable);
+        
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);     
+    }
+}
 
 export async function getProductById(req, res) {
     

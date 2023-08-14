@@ -16,11 +16,35 @@ export async function ReadProducts() {
     FROM products_categories
     INNER JOIN categories
     ON categories.id = products_categories.categoryid
-    WHERE products_categories.categoryid = products.id
+    WHERE products_categories.productid = products.id
     ) as categories 
     FROM products 
     WHERE isavailable = true
     `);
+   
+    return product.rows;
+}
+
+export async function ReadUserProducts(userid) {
+    const product = await db.query(`
+    SELECT *, 
+    array (
+    SELECT url
+    FROM products_photos
+    INNER JOIN photos
+    ON photos.id = products_photos.photoid
+    WHERE products_photos.productid = products.id
+    ) as photos,
+    array (
+    SELECT name
+    FROM products_categories
+    INNER JOIN categories
+    ON categories.id = products_categories.categoryid
+    WHERE products_categories.productid = products.id
+    ) as categories 
+    FROM products 
+    WHERE ownerid = $1;
+    `, [userid]);
    
     return product.rows;
 }
@@ -115,4 +139,8 @@ export async function DeleteProduct(id) {
     await db.query(`DELETE FROM products_categories WHERE productid = $1`, [id]);
     await db.query(`DELETE FROM products_photos WHERE productid = $1`, [id]);
     await db.query(`DELETE FROM products WHERE id = $1`, [id]);
+}
+
+export async function UpdateProductAvailabilty(id, value) {
+    await db.query(`UPDATE products SET isavailable = $1 WHERE id = $2`, [value, id]);
 }
