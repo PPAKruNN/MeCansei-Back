@@ -8,8 +8,8 @@ import categoriesRouter from "./routes/categories.routes.js";
 
 const app = Express();
 
-app.use(json());
 app.use(cors());
+app.use(json());
 
 app.use(galleryRouter);
 app.use(productsRouter);
